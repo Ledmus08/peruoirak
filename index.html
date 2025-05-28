@@ -19,17 +19,17 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden; /* Evitar barra de desplazamiento */
+            overflow: hidden; 
             transition: background-color 0.5s ease;
-            color: #eee; /* Color de texto base */
-            position: relative; /* Para posicionar las imágenes animadas */
+            color: #eee; 
+            position: relative; 
         }
 
         .animated-image {
             position: absolute;
-            width: 50px; /* Ajusta el tamaño de las imágenes */
+            width: 50px; 
             height: auto;
-            z-index: 0; /* Asegura que estén detrás del contenedor del quiz */
+            z-index: 0; 
         }
 
         @keyframes bounce {
@@ -37,7 +37,7 @@
                 transform: translate(var(--x), var(--y));
             }
             50% {
-                /* Pequeña pausa o alteración en la dirección si se desea */
+
             }
         }
 
@@ -48,9 +48,9 @@
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
             text-align: center;
             width: 90%;
-            max-width: 500px; /* Ajustar ancho máximo */
+            max-width: 500px; 
             transition: transform 0.4s ease-in-out, background-color 0.4s ease;
-            z-index: 1; /* Asegura que esté delante de las imágenes animadas */
+            z-index: 1; 
         }
 
         h1 {
@@ -64,8 +64,8 @@
 
         .image-container {
             width: 100%;
-            max-width: 350px; /* Ajustar ancho máximo de la imagen */
-            height: 200px; /* Ajustar altura de la imagen */
+            max-width: 350px; 
+            height: 200px; 
             overflow: hidden;
             border-radius: 12px;
             margin: 0 auto 30px;
@@ -141,7 +141,7 @@
             visibility: hidden;
             transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             transform: scale(0.8);
-            z-index: 2; /* Asegura que esté por encima del quiz */
+            z-index: 2; 
         }
 
         .error-overlay.show {
@@ -174,7 +174,7 @@
             color: #eee;
             font-size: 1.2em;
             text-align: center;
-            z-index: 1000; /* Asegura que esté por encima de todo */
+            z-index: 1000; 
         }
 
         .results-overlay h2 {
@@ -221,10 +221,10 @@
         }
 
         .flag-icon {
-            width: 24px; /* Ajusta el tamaño según necesites */
+            width: 24px; 
             height: auto;
-            vertical-align: middle; /* Alinea verticalmente con el texto */
-            margin-left: 5px; /* Espacio entre el texto y el icono */
+            vertical-align: middle; 
+            margin-left: 5px; 
         }
     </style>
 </head>
@@ -249,7 +249,7 @@
         <img src="https://cdn.7tv.app/emote/01G038Y95G0006QCHD84CZS1JM/4x.avif" alt="Imagen final">
         <p>RESULTADOS</p>
         <p>Aciertos: <span id="final-correct-answers">0</span></p>
-        <p>Errores: <span id="final-incorrect-answers">6</span></p>
+        <p>Errores: <span id="final-incorrect-answers">5</span></p>
     </div>
 
     <script>
@@ -278,7 +278,7 @@
         let correctAnswers = 0;
         let usedImageIndices = [];
         let canAnswer = true;
-        const numberOfQuestions = 6;
+        const numberOfQuestions = 5;
         let currentQuestionNumber = 0;
         let currentImages = [];
 
@@ -302,11 +302,10 @@
             img.style.width = `${data.size}px`;
             img.style.height = 'auto';
 
-            // Posición inicial aleatoria dentro de la pantalla
             let x = Math.random() * (window.innerWidth - data.size);
             let y = Math.random() * (window.innerHeight - data.size);
-            let dx = (Math.random() - 0.5) * 2; // Velocidad horizontal aleatoria
-            let dy = (Math.random() - 0.5) * 2; // Velocidad vertical aleatoria
+            let dx = (Math.random() - 0.5) * 2; 
+            let dy = (Math.random() - 0.5) * 2; 
 
             img.style.left = `${x}px`;
             img.style.top = `${y}px`;
@@ -322,7 +321,6 @@
                 item.x += item.dx;
                 item.y += item.dy;
 
-                // Rebotar en los bordes de la pantalla
                 if (item.x + item.size > window.innerWidth || item.x < 0) {
                     item.dx *= -1;
                 }
@@ -336,7 +334,6 @@
             requestAnimationFrame(updateAnimatedImages);
         }
 
-        // Iniciar la animación de las imágenes
         updateAnimatedImages();
 
         function selectRandomImages(arr, count) {
@@ -362,7 +359,7 @@
                     iranButton.disabled = true;
                     finalCorrectAnswersSpan.textContent = correctAnswers;
                     finalIncorrectAnswersSpan.textContent = incorrectAnswers;
-                    finalPopup.style.display = 'flex'; // Mostrar la ventana emergente final
+                    finalPopup.style.display = 'flex'; 
                 }, 500);
                 return;
             }
@@ -406,7 +403,6 @@
             showError('iran');
         });
 
-        // Inicializar el juego seleccionando aleatoriamente 6 imágenes
         currentImages = selectRandomImages(allImages, numberOfQuestions);
         loadNextQuestion();
     </script>
